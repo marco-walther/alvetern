@@ -88,6 +88,24 @@ the CNAME automatically — done in a click.
 Finally, set `site: 'https://alvetern.com'` in `astro.config.mjs` and push, so
 canonical URLs use your domain.
 
+## Contact form (Web3Forms)
+
+The inquiry form on the home page submits via [Web3Forms](https://web3forms.com)
+— a free service that emails you each submission, with no backend required.
+
+To activate it:
+
+1. Go to <https://web3forms.com>, enter the email address that should receive
+   inquiries (e.g. `guido.walther@alvetern.com`), and you'll be emailed an
+   **access key**.
+2. In [src/pages/index.astro](src/pages/index.astro), replace
+   `YOUR_WEB3FORMS_ACCESS_KEY` with that key.
+3. Commit and push — the form is live.
+
+The access key is safe to commit (it only identifies the destination inbox).
+Until it's set, the form shows a fallback message asking visitors to email
+directly.
+
 ## Optional: deploy from the CLI instead
 
 ```bash

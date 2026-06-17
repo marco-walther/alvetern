@@ -31,6 +31,25 @@ const services = [
     body: 'Helping US companies export their products to European markets, navigating standards, partners, and logistics.',
   },
 ];
+
+const steps = [
+  {
+    title: 'Tell us your need',
+    body: 'Share the product you’re looking for or the market you want to reach — by form, phone, or email.',
+  },
+  {
+    title: 'We source & represent',
+    body: 'We connect you with the right European manufacturer or North American partner from our network.',
+  },
+  {
+    title: 'Compliance & logistics',
+    body: 'We help navigate UL/CE standards, customs, and trans-Atlantic shipping so nothing gets stuck.',
+  },
+  {
+    title: 'Delivered & supported',
+    body: 'Your components arrive — backed by ongoing local support on the right side of the ocean.',
+  },
+];
 ---
 
 <Layout>
@@ -88,8 +107,30 @@ const services = [
       </div>
     </section>
 
+    <!-- How we work -->
+    <section id="how" class="section section-soft">
+      <div class="wrap">
+        <h2 class="section-title">How we work</h2>
+        <p class="section-sub">
+          A simple path from first contact to delivered components — across the
+          Atlantic, in either direction.
+        </p>
+        <ol class="steps">
+          {
+            steps.map((s, i) => (
+              <li class="step">
+                <span class="step-num">{i + 1}</span>
+                <h3>{s.title}</h3>
+                <p>{s.body}</p>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
     <!-- Partners -->
-    <section id="partners" class="section section-soft">
+    <section id="partners" class="section">
       <div class="wrap">
         <h2 class="section-title">Partners we represent</h2>
         <p class="section-sub">
@@ -115,24 +156,72 @@ const services = [
     </section>
 
     <!-- Contact -->
-    <section id="contact" class="section">
-      <div class="wrap contact">
-        <div>
-          <h2 class="section-title">Contact</h2>
-          <p class="section-sub">
-            Tell us about your products or your market — we’ll help you find the
-            way across.
-          </p>
+    <section id="contact" class="section section-soft">
+      <div class="wrap">
+        <h2 class="section-title">Get in touch</h2>
+        <p class="section-sub">
+          Tell us about your products or your market — we’ll help you find the
+          way across. Send an inquiry and we’ll get back to you.
+        </p>
+        <div class="contact-grid">
+          <form id="inquiry" class="inquiry-form">
+            {/* Web3Forms — replace the access key below with your own */}
+            <input
+              type="hidden"
+              name="access_key"
+              value="YOUR_WEB3FORMS_ACCESS_KEY"
+            />
+            <input
+              type="hidden"
+              name="subject"
+              value="New inquiry from alvetern.com"
+            />
+            <input
+              type="checkbox"
+              name="botcheck"
+              class="hp"
+              tabindex="-1"
+              autocomplete="off"
+            />
+
+            <div class="row">
+              <div class="field">
+                <label for="name">Name *</label>
+                <input id="name" name="name" type="text" required />
+              </div>
+              <div class="field">
+                <label for="company">Company</label>
+                <input id="company" name="company" type="text" />
+              </div>
+            </div>
+            <div class="row">
+              <div class="field">
+                <label for="email">Email *</label>
+                <input id="email" name="email" type="email" required />
+              </div>
+              <div class="field">
+                <label for="phone">Phone</label>
+                <input id="phone" name="phone" type="tel" />
+              </div>
+            </div>
+            <div class="field">
+              <label for="message">How can we help? *</label>
+              <textarea id="message" name="message" rows="5" required></textarea>
+            </div>
+            <button class="btn primary" type="submit">Send inquiry</button>
+            <p class="form-status" role="status" aria-live="polite" hidden></p>
+          </form>
+
+          <address class="contact-card">
+            <strong>Alvetern Inc.</strong>
+            <span>Lawrenceville, GA 30043</span>
+            <span class="spacer"></span>
+            <a href="tel:+14047254888">+1 (404) 725-4888</a>
+            <a href="mailto:guido.walther@alvetern.com"
+              >guido.walther@alvetern.com</a
+            >
+          </address>
         </div>
-        <address class="contact-card">
-          <strong>Alvetern Inc.</strong>
-          <span>Lawrenceville, GA 30043</span>
-          <span class="spacer"></span>
-          <a href="tel:+14047254888">+1 (404) 725-4888</a>
-          <a href="mailto:guido.walther@alvetern.com"
-            >guido.walther@alvetern.com</a
-          >
-        </address>
       </div>
     </section>
   </main>
@@ -143,6 +232,43 @@ const services = [
       <span>Lawrenceville, GA · USA</span>
     </div>
   </footer>
+
+  <script>
+    const form = document.getElementById('inquiry') as HTMLFormElement | null;
+    if (form) {
+      const status = form.querySelector('.form-status') as HTMLElement;
+      const button = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        status.hidden = false;
+        status.className = 'form-status';
+        status.textContent = 'Sending…';
+        button.disabled = true;
+        try {
+          const res = await fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: { Accept: 'application/json' },
+            body: new FormData(form),
+          });
+          const data = await res.json();
+          if (data.success) {
+            form.reset();
+            status.classList.add('ok');
+            status.textContent =
+              'Thanks — we received your inquiry and will be in touch shortly.';
+          } else {
+            throw new Error(data.message || 'Submission failed');
+          }
+        } catch (err) {
+          status.classList.add('err');
+          status.textContent =
+            'Sorry, something went wrong. Please email guido.walther@alvetern.com directly.';
+        } finally {
+          button.disabled = false;
+        }
+      });
+    }
+  </script>
 </Layout>
 
 <style>
@@ -276,6 +402,47 @@ const services = [
     color: var(--muted);
   }
 
+  /* How we work — steps */
+  .steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+    counter-reset: step;
+  }
+  .step {
+    position: relative;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 1.5rem;
+  }
+  .step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 50%;
+    background: var(--green);
+    color: #fff;
+    font-weight: 800;
+    font-size: 1.05rem;
+    margin-bottom: 0.9rem;
+  }
+  .step h3 {
+    margin: 0 0 0.4rem;
+    font-size: 1.1rem;
+    color: var(--green-dark);
+  }
+  .step p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.97rem;
+  }
+
   /* Partner cards */
   .partners {
     display: grid;
@@ -317,17 +484,87 @@ const services = [
   }
 
   /* Contact */
-  .contact {
+  .contact-grid {
     display: grid;
     gap: 2rem;
     grid-template-columns: 1fr;
   }
-  @media (min-width: 720px) {
-    .contact {
-      grid-template-columns: 1.2fr 1fr;
+  @media (min-width: 760px) {
+    .contact-grid {
+      grid-template-columns: 1.5fr 1fr;
       align-items: start;
     }
   }
+
+  /* Inquiry form */
+  .inquiry-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .inquiry-form .row {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 480px) {
+    .inquiry-form .row {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+  .field label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .field input,
+  .field textarea {
+    font: inherit;
+    color: var(--ink);
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 0.65rem 0.8rem;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .field input:focus,
+  .field textarea:focus {
+    outline: none;
+    border-color: var(--green);
+    box-shadow: 0 0 0 3px rgba(47, 158, 52, 0.15);
+  }
+  .field textarea {
+    resize: vertical;
+  }
+  .inquiry-form .btn {
+    align-self: flex-start;
+    cursor: pointer;
+    border: none;
+  }
+  .hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+  }
+  .form-status {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+  .form-status.ok {
+    color: var(--green-dark);
+  }
+  .form-status.err {
+    color: #b3261e;
+  }
+
   .contact-card {
     display: flex;
     flex-direction: column;
