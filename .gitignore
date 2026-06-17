@@ -25,3 +25,6 @@ Thumbs.db
 
 # wrangler (if you later use the CLI)
 .wrangler/
+
+# source image originals (served copies live in public/)
+images-marco/
