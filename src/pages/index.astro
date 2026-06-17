@@ -1,0 +1,127 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Alvetern">
+  <main>
+    <section class="hero">
+      <p class="eyebrow">ALVETERN</p>
+      <h1>Building something worth waiting for.</h1>
+      <p class="lede">
+        A new home on the web is taking shape here. This is the placeholder —
+        the real thing is on its way.
+      </p>
+      <div class="actions">
+        <a class="btn primary" href="mailto:hello@alvetern.com">Get in touch</a>
+        <a class="btn ghost" href="#about">Learn more</a>
+      </div>
+    </section>
+
+    <section id="about" class="about">
+      <h2>What is Alvetern?</h2>
+      <p>
+        Replace this copy with your story. Until then, the site is fully wired
+        up and deploying to Cloudflare Pages, ready for your custom domain.
+      </p>
+    </section>
+
+    <footer>
+      <span>© {new Date().getFullYear()} Alvetern</span>
+      <span>Deployed on Cloudflare Pages</span>
+    </footer>
+  </main>
+</Layout>
+
+<style>
+  main {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: clamp(2rem, 6vw, 6rem) 1.5rem 3rem;
+  }
+
+  .hero {
+    padding: clamp(3rem, 12vh, 8rem) 0 clamp(2rem, 8vh, 5rem);
+  }
+
+  .eyebrow {
+    letter-spacing: 0.35em;
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin: 0 0 1rem;
+  }
+
+  h1 {
+    font-size: clamp(2.25rem, 6vw, 4rem);
+    line-height: 1.05;
+    margin: 0 0 1.25rem;
+    background: linear-gradient(120deg, var(--accent), var(--accent-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .lede {
+    font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+    color: var(--muted);
+    max-width: 42rem;
+    margin: 0 0 2rem;
+  }
+
+  .actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 0.75rem 1.4rem;
+    border-radius: 999px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.12s ease, opacity 0.12s ease;
+  }
+
+  .btn:hover {
+    transform: translateY(-1px);
+  }
+
+  .btn.primary {
+    background: linear-gradient(120deg, var(--accent), var(--accent-2));
+    color: #04121a;
+  }
+
+  .btn.ghost {
+    border: 1px solid rgba(231, 234, 238, 0.2);
+    color: var(--fg);
+  }
+
+  .about {
+    border-top: 1px solid rgba(231, 234, 238, 0.08);
+    padding-top: 2.5rem;
+    margin-top: 2rem;
+  }
+
+  .about h2 {
+    font-size: 1.5rem;
+    margin: 0 0 0.75rem;
+  }
+
+  .about p {
+    color: var(--muted);
+    max-width: 42rem;
+    line-height: 1.6;
+  }
+
+  footer {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 4rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(231, 234, 238, 0.08);
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+</style>

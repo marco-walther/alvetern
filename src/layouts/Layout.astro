@@ -1,0 +1,65 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Alvetern',
+  description = 'Alvetern — building something worth waiting for.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --bg: #0b0d10;
+    --fg: #e7eaee;
+    --muted: #9aa3ad;
+    --accent: #6ee7b7;
+    --accent-2: #38bdf8;
+    --maxw: 64rem;
+    font-family:
+      ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica,
+      Arial, sans-serif;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    min-height: 100dvh;
+    background:
+      radial-gradient(1200px 600px at 70% -10%, rgba(56, 189, 248, 0.18), transparent 60%),
+      radial-gradient(900px 500px at 10% 110%, rgba(110, 231, 183, 0.14), transparent 55%),
+      var(--bg);
+    color: var(--fg);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  a {
+    color: var(--accent-2);
+  }
+</style>
