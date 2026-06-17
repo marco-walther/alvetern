@@ -1,0 +1,56 @@
+---
+import Logo from './Logo.astro';
+---
+
+<header class="site-header">
+  <a class="brand" href="/" aria-label="Alvetern home">
+    <Logo />
+  </a>
+  <nav aria-label="Primary">
+    <a href="#about">What we do</a>
+    <a href="#partners">Partners</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.9rem clamp(1rem, 5vw, 3rem);
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: saturate(160%) blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .brand {
+    text-decoration: none;
+  }
+  nav {
+    display: flex;
+    gap: clamp(1rem, 3vw, 2rem);
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+  nav a {
+    color: var(--ink);
+    text-decoration: none;
+    padding: 0.25rem 0;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.15s ease, color 0.15s ease;
+  }
+  nav a:hover {
+    color: var(--green-dark);
+    border-color: var(--green);
+  }
+  @media (max-width: 480px) {
+    nav {
+      gap: 1rem;
+      font-size: 0.85rem;
+    }
+  }
+</style>

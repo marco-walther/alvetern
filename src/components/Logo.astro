@@ -1,0 +1,52 @@
+---
+// Alvetern wordmark: an "A/V" beam mark (green up-triangle + yellow down-triangle,
+// echoing the original logo) followed by the company name.
+interface Props {
+  /** Color of the "Alvetern" text. Defaults to the brand green. */
+  color?: string;
+  /** Height of the mark + text in rem. */
+  size?: number;
+}
+const { color = 'var(--green)', size = 1.6 } = Astro.props;
+---
+
+<span class="logo" style={`--logo-size:${size}rem; --logo-color:${color};`}>
+  <svg class="mark" viewBox="0 0 24 24" aria-hidden="true">
+    <path
+      d="M12 3 L21 19 L3 19 Z"
+      fill="var(--green)"
+      stroke="var(--green)"
+      stroke-width="1.4"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M6.5 7.5 L17.5 7.5 L12 16.5 Z"
+      fill="var(--accent)"
+      stroke="var(--accent)"
+      stroke-width="1.2"
+      stroke-linejoin="round"
+    />
+  </svg>
+  <span class="word">Alvetern</span>
+</span>
+
+<style>
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    font-size: var(--logo-size);
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    line-height: 1;
+    white-space: nowrap;
+  }
+  .mark {
+    width: 1.05em;
+    height: 1.05em;
+    flex: none;
+  }
+  .word {
+    color: var(--logo-color);
+  }
+</style>
