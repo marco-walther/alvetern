@@ -5,6 +5,6 @@ import { defineConfig } from 'astro/config';
 // When you attach a custom domain in Cloudflare, set `site` to that URL so
 // canonical links and sitemaps use it.
 export default defineConfig({
-  // site: 'https://your-custom-domain.com',
+  site: 'https://alvetern.com',
   output: 'static',
 });
