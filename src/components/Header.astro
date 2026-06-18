@@ -1,15 +1,23 @@
 ---
+import markLogo from '../images/logo-a1.png';
+import nameLogo from '../images/logo-name.png';
 ---
 
 <header class="site-header">
   <a class="brand" href="/" aria-label="Alvetern Inc. home">
-    <img class="brand-mark" src="/logo-a1.png" alt="" width="360" height="360" />
+    <img
+      class="brand-mark"
+      src={markLogo.src}
+      alt=""
+      width={markLogo.width}
+      height={markLogo.height}
+    />
     <img
       class="brand-word"
-      src="/logo-name.png"
+      src={nameLogo.src}
       alt="Alvetern Inc."
-      width="502"
-      height="87"
+      width={nameLogo.width}
+      height={nameLogo.height}
     />
   </a>
   <nav aria-label="Primary">

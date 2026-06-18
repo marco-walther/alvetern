@@ -1,18 +1,23 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
+import atlanta from '../images/atlanta.jpg';
+import switzerland from '../images/switzerland.jpg';
+import headshot from '../images/headshot-guido.jpg';
+import lunatoneLogo from '../images/lunatone.png';
+import elkosunLogo from '../images/elkosun.png';
 
 const partners = [
   {
     name: 'Lunatone',
     url: 'https://www.lunatone.com/en/',
-    logo: '/partners/lunatone.png',
+    logo: lunatoneLogo,
     blurb: 'DALI lighting control components and systems.',
   },
   {
     name: 'Elkosun',
     url: 'https://www.elkosun.com/',
-    logo: '/partners/elkosun.png',
+    logo: elkosunLogo,
     blurb: 'Electronic components for professional lighting.',
   },
 ];
@@ -65,13 +70,13 @@ const steps: {
     <section class="hero">
       <img
         class="hero-img hero-switzerland"
-        src="/switzerland.jpg"
+        src={switzerland.src}
         alt=""
         aria-hidden="true"
       />
       <img
         class="hero-img hero-atlanta"
-        src="/atlanta.jpg"
+        src={atlanta.src}
         alt=""
         aria-hidden="true"
       />
@@ -157,7 +162,7 @@ const steps: {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <img class="partner-logo" src={p.logo} alt={p.name} />
+                <img class="partner-logo" src={p.logo.src} alt={p.name} />
                 <span class="partner-blurb">{p.blurb}</span>
                 <span class="partner-link">Visit site →</span>
               </a>
@@ -232,13 +237,9 @@ const steps: {
               <a href="mailto:guido.walther@alvetern.com"
                 >guido.walther@alvetern.com</a
               >
-              <img
-                class="contact-photo"
-                src="/headshot-guido.jpg"
-                alt="Guido Walther"
-                width="200"
-                height="200"
-              />
+              <span class="contact-photo">
+                <img src={headshot.src} alt="Guido Walther" />
+              </span>
             </address>
 
             <button class="btn primary" type="submit">Send inquiry</button>
@@ -529,11 +530,18 @@ const steps: {
   .contact-photo {
     width: 96px;
     height: 96px;
-    object-fit: cover;
-    object-position: top;
     border-radius: 18px;
+    overflow: hidden;
     align-self: flex-start;
     margin-top: auto;
+  }
+  .contact-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    transform: scale(1.18);
+    transform-origin: top center;
   }
   .contact-card strong {
     font-size: 1.2rem;
