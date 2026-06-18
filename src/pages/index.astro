@@ -196,50 +196,54 @@ const steps: {
               autocomplete="off"
             />
 
-            <div class="row">
-              <div class="field">
-                <label for="name">Name *</label>
-                <input id="name" name="name" type="text" required />
+            <div class="form-fields">
+              <div class="row">
+                <div class="field">
+                  <label for="name">Name *</label>
+                  <input id="name" name="name" type="text" required />
+                </div>
+                <div class="field">
+                  <label for="company">Company</label>
+                  <input id="company" name="company" type="text" />
+                </div>
+              </div>
+              <div class="row">
+                <div class="field">
+                  <label for="email">Email *</label>
+                  <input id="email" name="email" type="email" required />
+                </div>
+                <div class="field">
+                  <label for="phone">Phone</label>
+                  <input id="phone" name="phone" type="tel" />
+                </div>
               </div>
               <div class="field">
-                <label for="company">Company</label>
-                <input id="company" name="company" type="text" />
+                <label for="message">How can we help? *</label>
+                <textarea id="message" name="message" rows="5" required
+                ></textarea>
               </div>
             </div>
-            <div class="row">
-              <div class="field">
-                <label for="email">Email *</label>
-                <input id="email" name="email" type="email" required />
-              </div>
-              <div class="field">
-                <label for="phone">Phone</label>
-                <input id="phone" name="phone" type="tel" />
-              </div>
-            </div>
-            <div class="field">
-              <label for="message">How can we help? *</label>
-              <textarea id="message" name="message" rows="5" required></textarea>
-            </div>
+
+            <address class="contact-card">
+              <strong>Alvetern Inc.</strong>
+              <span>Lawrenceville, GA 30043</span>
+              <span class="spacer"></span>
+              <a href="tel:+14047254888">+1 (404) 725-4888</a>
+              <a href="mailto:guido.walther@alvetern.com"
+                >guido.walther@alvetern.com</a
+              >
+              <img
+                class="contact-photo"
+                src="/headshot-guido.jpg"
+                alt="Guido Walther"
+                width="200"
+                height="200"
+              />
+            </address>
+
             <button class="btn primary" type="submit">Send inquiry</button>
             <p class="form-status" role="status" aria-live="polite" hidden></p>
           </form>
-
-          <address class="contact-card">
-            <strong>Alvetern Inc.</strong>
-            <span>Lawrenceville, GA 30043</span>
-            <span class="spacer"></span>
-            <a href="tel:+14047254888">+1 (404) 725-4888</a>
-            <a href="mailto:guido.walther@alvetern.com"
-              >guido.walther@alvetern.com</a
-            >
-            <img
-              class="contact-photo"
-              src="/headshot-guido.jpg"
-              alt="Guido Walther"
-              width="200"
-              height="200"
-            />
-          </address>
         </div>
       </div>
     </section>
@@ -395,7 +399,6 @@ const steps: {
   .section-sub {
     color: var(--muted);
     font-size: 1.1rem;
-    max-width: 48rem;
     margin: 0 0 2.5rem;
   }
 
@@ -513,17 +516,6 @@ const steps: {
   }
 
   /* Contact */
-  .contact-grid {
-    display: grid;
-    gap: 1.5rem;
-    grid-template-columns: 1fr;
-    align-items: stretch;
-  }
-  @media (min-width: 820px) {
-    .contact-grid {
-      grid-template-columns: 1.6fr 1fr;
-    }
-  }
   .contact-card {
     display: flex;
     flex-direction: column;
@@ -560,9 +552,41 @@ const steps: {
 
   /* Inquiry form */
   .inquiry-form {
+    display: grid;
+    grid-template-columns: 1fr;
+    column-gap: 1.5rem;
+    row-gap: 1rem;
+    align-items: stretch;
+  }
+  .form-fields {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+  }
+  /* On mobile the contact card sits last (after the button) */
+  .contact-card {
+    order: 1;
+  }
+  @media (min-width: 820px) {
+    .inquiry-form {
+      grid-template-columns: 1.6fr 1fr;
+    }
+    .form-fields {
+      grid-column: 1;
+      grid-row: 1;
+    }
+    .contact-card {
+      grid-column: 2;
+      grid-row: 1;
+    }
+    .inquiry-form .btn {
+      grid-column: 1;
+      grid-row: 2;
+    }
+    .form-status {
+      grid-column: 1;
+      grid-row: 3;
+    }
   }
   .inquiry-form .row {
     display: grid;
@@ -604,7 +628,8 @@ const steps: {
     resize: vertical;
   }
   .inquiry-form .btn {
-    align-self: flex-start;
+    align-self: start;
+    justify-self: start;
     cursor: pointer;
     border: none;
   }
