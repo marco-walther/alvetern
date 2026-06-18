@@ -28,3 +28,7 @@ Thumbs.db
 
 # source image originals (served copies live in public/)
 images-marco/
+
+# local handover docs (not for publishing)
+docs/
+.chrometmp/
